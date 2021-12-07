@@ -43,7 +43,7 @@ addADepartment(dept){
   )
 }
 
-addARole(role){
+addANewRole(role){
   return this.connection.promise().query(
     'INSERT INTO role SET ?', role
   )
