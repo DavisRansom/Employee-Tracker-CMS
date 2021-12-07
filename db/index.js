@@ -37,36 +37,29 @@ viewAllEmployees(){
   )
 }
 
-addADepartment(){
+addADepartment(dept){
   return this.connection.promise().query(
-    //????????????
+    `INSERT INTO department SET ?`, dept 
   )
 }
 
-addARole(){
+addARole(role){
   return this.connection.promise().query(
-    //????????????
+    'INSERT INTO role SET ?', role
   )
 }
 
-addAnEmployee(){
+addAnEmployee(employee){
   return this.connection.promise().query(
-    //????????????
+    `INSERT INTO employee SET ?`, employee
   )
 }
 
-updateAnEmployeeRole(){
+updateAnEmployeeRole(id, role){
   return this.connection.promise().query(
-    //??????????????
+    `UPDATE employee SET ? WHERE id = ?`, [role, id]
   )
 }
-
-
-
-
-
-
-
   }
 
   module.exports = new DB(connection);
