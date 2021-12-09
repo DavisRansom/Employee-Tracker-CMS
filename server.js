@@ -1,6 +1,6 @@
 //Bring in Inquirer
 const inquirer = require('inquirer');
-const { addARole, addAnEmployee } = require('./db');
+const { addARole, addAnEmployee, updateAnEmployeeRole } = require('./db');
 //Bring in the database created in connection.js
 const db = require('./db');
 //Bring in ConsoleTable
@@ -22,14 +22,14 @@ function mainMenu() {
   })
     .then(response => {
       switch (response.action) {
-        case "View Departments": return viewAllDepartments();
-        case "View All Roles": return viewAllRoles();
-        case "View All Employees": return viewAllEmployees();
-        case "Add a Department": return addADepartment();
-        case "Add a Role": return addANewRole();
-        case "Add an Employee": return addAnEmployee();
-        case "Update an Employee Role": return
-        case "Exit": return finish();
+        case "View Departments": viewAllDepartments(); break;
+        case "View All Roles": viewAllRoles(); break;
+        case "View All Employees": viewAllEmployees(); break;
+        case "Add a Department": addADepartment(); break;
+        case "Add a Role": addANewRole(); break;
+        case "Add an Employee": addANewEmployee(); break;
+        case "Update an Employee Role": updateAnEmployeeRole(); break;
+        case "Exit": finish(); break;
       }
     });
 }
@@ -76,29 +76,29 @@ async function addADepartment() {
 async function addANewRole() {
   const response = await inquirer.prompt({
     message: "What is the name of the role that you would like to add?",
-    name: "name"
+    name: "title"
   });
-  const [rows] = await db.addADepartment(response)
+  const [rows] = await db.addANewRole(response)
   console.table(rows)
   mainMenu();
 }
 
-async function addAnEmployee() {
-  const response = await inquirer.prompt({
-    message: "What is the first name of the employee that you would like to add?",
-    name: "First Name"
-  });
+async function addANewEmployee() {
+const response = await inquirer.prompt({
+     message: "What is the first name of the employee that you would like to add?",
+     name: "first_name"
+   });
   inquirer.prompt({
-    name: "Last Name",
+    name: "last_name",
     message: "What is the last name of the employee that you would like to add?",
   });
   inquirer.prompt({
-    name: "Role",
+    name: "title",
     message: "What is the role of the employee that you are currently adding?",
-    type: "list",
+   type: "list",
     choices: ["Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer", "Exit"]
   });
-  const [rows] = await db.add(response)
+  const [rows] = await db.addANewEmployee(response)
   console.table(rows)
   mainMenu();
 }
