@@ -48,13 +48,13 @@ addANewRole(role){
     'INSERT INTO role SET ?', role
   )
 }
-
-addAnEmployee(employee){
+/////////////////////////////////
+addANewEmployee(employee){
   return this.connection.promise().query(
     `INSERT INTO employee SET ?`, employee
   )
 }
-
+///////////////////////////
 updateAnEmployeeRole(id, role){
   return this.connection.promise().query(
     `UPDATE employee SET ? WHERE id = ?`, [role, id]

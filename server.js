@@ -52,7 +52,7 @@ function viewAllRoles() {
     .then(([rows]) => {
       console.table(rows);
       mainMenu();
-    })
+    });
 }
 
 function viewAllEmployees() {
@@ -60,7 +60,7 @@ function viewAllEmployees() {
     .then(([rows]) => {
       console.table(rows);
       mainMenu();
-    })
+    });
 }
 
 async function addADepartment() {
@@ -84,21 +84,57 @@ async function addANewRole() {
 }
 
 async function addANewEmployee() {
-const response = await inquirer.prompt({
-     message: "What is the first name of the employee that you would like to add?",
-     name: "first_name"
-   });
-  inquirer.prompt({
-    name: "last_name",
+  const response = await inquirer.prompt({
+    message: "What is the first name of the employee that you would like to add?",
+    name: "first_name"
+  });
+  await inquirer.prompt({
     message: "What is the last name of the employee that you would like to add?",
+    name: "last_name"
   });
-  inquirer.prompt({
-    name: "title",
-    message: "What is the role of the employee that you are currently adding?",
-   type: "list",
-    choices: ["Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer", "Exit"]
+  await inquirer.prompt({
+    name: "role_id",
+    message: "What is the role id of the employee that you are currently adding?",
   });
+  await inquirer.prompt({
+      name: "manager_id",
+      message: "What is the manager id of the employee that you are currently adding?",
+    });
   const [rows] = await db.addANewEmployee(response)
   console.table(rows)
   mainMenu();
 }
+
+// async function addANewEmployee() {
+// const response = await inquirer.prompt({
+//      message: "What is the first name of the employee that you would like to add?",
+//      name: "first_name"
+//    });
+//   await inquirer.prompt({
+//     message: "What is the last name of the employee that you would like to add?",
+//     name: "last_name"
+//   });
+//   await inquirer.prompt({
+//     name: "title",
+//     message: "What is the role of the employee that you are currently adding?",
+//    type: "list",
+//     choices: ["Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer", "Exit"]
+//   });
+//   const [rows] = await db.addANewEmployee(response)
+//   console.table(rows)
+//   mainMenu();
+// }
+
+// async function updateAnEmployeeRole() {
+//   const response = await inquirer.prompt({
+//        message: "What is the id of the employee that you would like to change the role of?",
+//        name: "id"
+//      });
+//     await inquirer.prompt({
+//       name: "role",
+//       message: "What is the new role that you would like this employee to have?",
+//     });
+//     const [rows] = await db.updateAnEmployeeRole(response)
+//     console.table(rows)
+//     mainMenu();
+//   }

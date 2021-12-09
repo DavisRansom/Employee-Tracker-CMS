@@ -15,21 +15,15 @@ node server
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* There are no prerequisites to use this program. 
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Users can access the program through Github her: https://github.com/DavisRansom/Employee-Tracker-CMS
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+Simply run npm install to make sure that all of the correct dependencies are involved, then run npm server to start the program. Then follow the on-screen instructions, choose from the choices and begin any content management that the system allows.
 
 ## Help
 
